@@ -38,6 +38,10 @@ class HomeScreen < PM::TableScreen
     }]
   end
 
+  def view_job(args)
+    open JobScreen.new(args)
+  end
+  
   def nav_left_button
     mp 'Left button'
   end
