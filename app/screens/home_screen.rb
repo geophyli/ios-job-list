@@ -1,12 +1,40 @@
 class HomeScreen < PM::Screen
-  title "Your title here"
+  title "职位列表"
   stylesheet HomeScreenStylesheet
 
   def on_load
-    set_nav_bar_button :left, system_item: :camera, action: :nav_left_button
-    set_nav_bar_button :right, title: "Right", action: :nav_right_button
+    @jobs = []
+    load_jobs
+    # set_nav_bar_button :left, system_item: :camera, action: :nav_left_button
+    # set_nav_bar_button :right, title: "Right", action: :nav_right_button
+    #
+    # @hello_world = append!(UILabel, :hello_world)
+  end
 
-    @hello_world = append!(UILabel, :hello_world)
+  def load_jobs
+    Job.all do |response, jobs|
+      if response.success?
+        @jobs = jobs
+        stop_refreshing
+        update_table_data
+      else
+        app.alert 'Sorry,there was an error fetching the jobs.'
+        mp response.error.localizedDesription
+      end
+    end
+  end
+
+  def table_data
+    [{
+      cells: @jobs.map do |job|
+        {
+          height: 100,
+          title: job.title,
+          action: :view_job,
+          argument: {job: job}
+        }
+      }]
+
   end
 
   def nav_left_button
