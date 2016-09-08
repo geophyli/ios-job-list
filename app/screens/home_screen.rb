@@ -1,4 +1,4 @@
-class HomeScreen < PM::Screen
+class HomeScreen < PM::TableScreen
   title "职位列表"
   stylesheet HomeScreenStylesheet
 
@@ -30,6 +30,7 @@ class HomeScreen < PM::Screen
         {
           height: 100,
           title: job.title,
+          subtitle: job.content,
           action: :view_job,
           arguments: { job: job }
         }
