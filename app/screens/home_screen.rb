@@ -31,10 +31,10 @@ class HomeScreen < PM::Screen
           height: 100,
           title: job.title,
           action: :view_job,
-          argument: {job: job}
+          arguments: { job: job }
         }
-      }]
-
+      end
+    }]
   end
 
   def nav_left_button
