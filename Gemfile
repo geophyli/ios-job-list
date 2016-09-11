@@ -6,7 +6,10 @@ gem "redpotion"
 gem "cdq" # Core Data
 gem "motion-yaml", "1.4" # Version 1.5 breaks CDQ
 gem "afmotion" # Networking
-
+gem "motion-authentication"
+gem "ProMotion-XLForm"
+gem "ProMotion-menu"
+gem "motion-fontawesome"
 # Debugging tools
 gem "newclear" # Completely wipe out the simulator and rebuild
 

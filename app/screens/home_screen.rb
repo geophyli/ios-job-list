@@ -2,13 +2,23 @@ class HomeScreen < PM::TableScreen
   title "职位列表"
   stylesheet HomeScreenStylesheet
 
+  include NavigationHelper
+
   def on_load
+    add_side_menu
+
     @jobs = []
     load_jobs
-    # set_nav_bar_button :left, system_item: :camera, action: :nav_left_button
-    # set_nav_bar_button :right, title: "Right", action: :nav_right_button
-    #
-    # @hello_world = append!(UILabel, :hello_world)
+  end
+
+  def sign_out_button
+    Auth.sign_out do
+      app.delegate.open_authenticated_root
+    end
+  end
+
+  def sign_in_button
+    open SignInScreen.new(nav_bar: true)
   end
 
   def load_jobs
@@ -41,7 +51,7 @@ class HomeScreen < PM::TableScreen
   def view_job(args)
     open JobScreen.new(args)
   end
-  
+
   def nav_left_button
     mp 'Left button'
   end
